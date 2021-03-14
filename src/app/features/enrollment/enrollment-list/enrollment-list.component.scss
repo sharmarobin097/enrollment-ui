@@ -1,23 +1,22 @@
-.active-box {
+.activation-box {
   display: inline-block;
   height: 14px;
   width: 14px;
   margin-right: 10px;
-  background-color: green;
+  &--active {
+    @extend .activation-box;
+    background-color: green;
+  }
+  &--inactive {
+    @extend .activation-box;
+    margin-left: 10px;
+    background-color: #ff3300;
+  }
 }
 
 .mat-form-field {
   font-size: 14px;
   width: 100%;
-}
-
-.inactive-box {
-  display: inline-block;
-  height: 14px;
-  width: 14px;
-  margin-left: 10px;
-  margin-right: 10px;
-  background-color: #ff3300;
 }
 
 .enrollment-container {
@@ -31,7 +30,7 @@
 .table-container {
   margin-left: 20px;
   width: 100%;
-  border: 1px solid lightgray;
+  border: 2px solid lightgray;
   border-bottom: none;
   max-height: 60vh;
   overflow-y: auto;

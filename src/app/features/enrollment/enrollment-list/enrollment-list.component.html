@@ -18,9 +18,9 @@
             {{ element.id }}
         </td>
         <td mat-footer-cell *matFooterCellDef>
-          <div class="active-box"></div>
+          <div class="activation-box--active"></div>
           <span>Active</span>
-          <div class="inactive-box"></div>
+          <div class="activation-box--inactive"></div>
           <span>Inactive</span>
         </td>
       </ng-container>
@@ -64,5 +64,6 @@
   </div>
   <mat-paginator [pageSizeOptions]="[5, 10, 20, 50]" showFirstLastButtons></mat-paginator>
 </div>
+
 
 
