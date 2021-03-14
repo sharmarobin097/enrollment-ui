@@ -1,0 +1,68 @@
+<div class="enrollment-container">
+  <h2>Enrollees List</h2>
+  <div>
+    <mat-form-field class="filter">
+      <mat-label>Filter</mat-label>
+      <input matInput (keyup)="applyFilter($event)" placeholder="Search" #input>
+    </mat-form-field>
+  </div>
+
+  <div class="table-container">
+    <table mat-table class="mat-elevation-z8"
+      matSort matSortActive="id" matSortDisableClear matSortDirection="asc" [dataSource]="dataSource">
+      <!-- Id column -->
+      <ng-container matColumnDef="id">
+        <th mat-header-cell mat-sort-header *matHeaderCellDef> Id </th>
+        <td mat-cell
+          [ngClass]="{ 'border-inactive': !element.active, 'border-active': element.active }" *matCellDef="let element">
+            {{ element.id }}
+        </td>
+        <td mat-footer-cell *matFooterCellDef>
+          <div class="active-box"></div>
+          <span>Active</span>
+          <div class="inactive-box"></div>
+          <span>Inactive</span>
+        </td>
+      </ng-container>
+
+      <!-- Name column -->
+      <ng-container matColumnDef="name">
+        <th mat-header-cell mat-sort-header *matHeaderCellDef> Name </th>
+        <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+        <td mat-footer-cell *matFooterCellDef></td>
+      </ng-container>
+
+      <!-- Active column -->
+      <ng-container matColumnDef="active">
+        <th mat-header-cell *matHeaderCellDef> Activation Status </th>
+        <td mat-cell *matCellDef="let element"> {{element.active | activeStatus}}</td>
+        <td mat-footer-cell *matFooterCellDef></td>
+      </ng-container>
+
+      <!-- Date of birth column -->
+      <ng-container matColumnDef="dateOfBirth">
+        <th mat-header-cell *matHeaderCellDef> Date Of Birth </th>
+        <td mat-cell *matCellDef="let element"> {{element.dateOfBirth | date | dashesOrValue}} </td>
+        <td mat-footer-cell *matFooterCellDef></td>
+      </ng-container>
+
+      <!-- Edit Icon-->
+      <ng-container matColumnDef="editIcon">
+        <th mat-header-cell *matHeaderCellDef></th>
+        <td mat-cell *matCellDef="let element">
+          <button mat-icon-button aria-label="Edit icon-button" (click)="openEditDialog(element)">
+            <mat-icon>edit</mat-icon>
+          </button>
+        </td>
+        <td mat-footer-cell *matFooterCellDef></td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
+      <tr mat-footer-row *matFooterRowDef="displayedColumns; sticky: true"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+  </div>
+  <mat-paginator [pageSizeOptions]="[5, 10, 20, 50]" showFirstLastButtons></mat-paginator>
+</div>
+
+
