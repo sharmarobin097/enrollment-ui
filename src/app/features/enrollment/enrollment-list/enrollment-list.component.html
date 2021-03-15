@@ -8,13 +8,36 @@
   </div>
 
   <div class="table-container">
-    <table mat-table class="mat-elevation-z8"
+    <table mat-table
       matSort matSortActive="id" matSortDisableClear matSortDirection="asc" [dataSource]="dataSource">
+
+      <!-- First Column Legends-->
+      <ng-container matColumnDef="legends">
+        <th mat-header-cell *matHeaderCellDef [attr.colspan]="4">
+          <div class="activation-box--active"></div>
+          <span>Active</span>
+          <div class="activation-box--inactive"></div>
+          <span>Inactive</span>
+        </th>
+      </ng-container>
+
+      <!-- First Column Export Icon-->
+      <ng-container matColumnDef="export-icon">
+        <th mat-header-cell *matHeaderCellDef [attr.colspan]="1">
+          <button mat-icon-button aria-label="Edit icon-button">
+            <mat-icon [ngStyle]="{'color': 'blue'}" (click)="exportToExcel()">import_export</mat-icon>
+          </button>
+        </th>
+      </ng-container>
+
       <!-- Id column -->
       <ng-container matColumnDef="id">
         <th mat-header-cell mat-sort-header *matHeaderCellDef> Id </th>
-        <td mat-cell
-          [ngClass]="{ 'border-inactive': !element.active, 'border-active': element.active }" *matCellDef="let element">
+        <td
+          mat-cell
+          [ngClass]="{ 'border-inactive': !element.active, 'border-active': element.active }"
+          *matCellDef="let element"
+        >
             {{ element.id }}
         </td>
         <td mat-footer-cell *matFooterCellDef>
@@ -29,21 +52,18 @@
       <ng-container matColumnDef="name">
         <th mat-header-cell mat-sort-header *matHeaderCellDef> Name </th>
         <td mat-cell *matCellDef="let element"> {{element.name}} </td>
-        <td mat-footer-cell *matFooterCellDef></td>
       </ng-container>
 
       <!-- Active column -->
       <ng-container matColumnDef="active">
         <th mat-header-cell *matHeaderCellDef> Activation Status </th>
         <td mat-cell *matCellDef="let element"> {{element.active | activeStatus}}</td>
-        <td mat-footer-cell *matFooterCellDef></td>
       </ng-container>
 
       <!-- Date of birth column -->
       <ng-container matColumnDef="dateOfBirth">
         <th mat-header-cell *matHeaderCellDef> Date Of Birth </th>
         <td mat-cell *matCellDef="let element"> {{element.dateOfBirth | date | dashesOrValue}} </td>
-        <td mat-footer-cell *matFooterCellDef></td>
       </ng-container>
 
       <!-- Edit Icon-->
@@ -54,11 +74,11 @@
             <mat-icon>edit</mat-icon>
           </button>
         </td>
-        <td mat-footer-cell *matFooterCellDef></td>
       </ng-container>
 
+      <tr mat-header-row *matHeaderRowDef="['legends', 'export-icon']; sticky: true">
+      </tr>
       <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
-      <tr mat-footer-row *matFooterRowDef="displayedColumns; sticky: true"></tr>
       <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
     </table>
   </div>

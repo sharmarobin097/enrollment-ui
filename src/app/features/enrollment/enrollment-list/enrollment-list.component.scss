@@ -23,15 +23,15 @@
   width: 1000px;
 }
 
-.filter, h2, mat-card {
+.filter, h2 {
   margin-left: 20px;
 }
 
 .table-container {
   margin-left: 20px;
   width: 100%;
-  border: 2px solid lightgray;
-  border-bottom: 1px solid lightgray;
+  border: 1px solid lightgray;
+  border-bottom: none;
   max-height: 60vh;
   overflow-y: auto;
 }
