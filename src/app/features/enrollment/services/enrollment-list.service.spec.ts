@@ -6,7 +6,7 @@ import {
 } from '@angular/common/http/testing';
 import { HttpClient } from '@angular/common/http';
 
-import { Enrollee } from '../interfaces/enrollee.interface';
+import { Enrollee } from '../interfaces/enrollee';
 import { mockEnrollees, mockEnrollee } from '../mocks/enrollees-mock';
 
 describe('EnrollmentListService', () => {

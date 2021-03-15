@@ -2,8 +2,8 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { EnrollmentEndpoints } from '../constants/enrollment-endpoints';
-import { Enrollee } from '../interfaces/enrollee.interface';
-import { SaveEnrolleeRequestBody } from '../interfaces/save-enrollee-request-body.interface';
+import { Enrollee } from '../interfaces/enrollee';
+import { SaveEnrolleeRequestBody } from '../interfaces/save-enrollee-request-body';
 
 @Injectable({
   providedIn: 'root'

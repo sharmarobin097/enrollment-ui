@@ -3,11 +3,16 @@ import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
-import { AnimationTimes, enrollmentListColWidths, ExcelFileNames } from 'src/app/shared/constants/global-constants';
-import { ExportExcelService } from 'src/app/shared/services/export-excel.service';
-import { SnackbarService } from 'src/app/shared/services/snackbar.service';
+import {
+  AnimationTimes,
+  enrollmentListColWidths,
+  ExcelFileNames
+} from '../../../shared/constants/global-constants';
+import { ExcelExportService } from '../../../shared/services/excel-export.service';
+import { SnackbarService } from '../../../shared/services/snackbar.service';
 import { EditDialogComponent } from '../edit-dialog/edit-dialog.component';
-import { Enrollee } from '../interfaces/enrollee.interface';
+import { EnrolleeExcelFormat } from '../interfaces/enrollee-excel-format';
+import { Enrollee } from '../interfaces/enrollee';
 import { EnrollmentListService } from '../services/enrollment-list.service';
 
 @Component({
@@ -31,7 +36,7 @@ export class EnrollmentListComponent implements AfterViewInit {
 
   constructor(
     private enrollmentListService: EnrollmentListService,
-    private excelExportService: ExportExcelService,
+    private excelExportService: ExcelExportService,
     private dialog: MatDialog,
     private snackBarService: SnackbarService
   ) { }
@@ -50,21 +55,25 @@ export class EnrollmentListComponent implements AfterViewInit {
   }
 
   exportToExcel(): void {
-    const formattedExcelData = this.enrolleeList.map(
+    const enrolleesFormattedForExcel = this.formatEnrolleesForExcel(this.enrolleeList);
+    const fileName = ExcelFileNames.EnrollmentList;
+    const excelColumnWidths = enrollmentListColWidths;
+    this.excelExportService.exportToExcel(enrolleesFormattedForExcel, fileName, excelColumnWidths);
+  }
+
+  formatEnrolleesForExcel(enrolleeList: Enrollee[]): EnrolleeExcelFormat[] {
+    const formattedExcelData = enrolleeList.map(
       (enrollee) => {
         const formattedObj = {
-          id: enrollee.id,
-          name: enrollee.name,
+          Id: enrollee.id,
+          Name: enrollee.name,
           'Activation Status': enrollee.active ? 'Active' : 'Inactive',
           'Date of Birth': enrollee.dateOfBirth || '',
         };
         return formattedObj;
       }
     );
-    const excelArray = formattedExcelData.map(Object.values);
-    const fileName = ExcelFileNames.EnrollmentList;
-    const excelColumnWidths = enrollmentListColWidths;
-    this.excelExportService.exportToExcel(excelArray, fileName, excelColumnWidths);
+    return formattedExcelData;
   }
 
   openEditDialog(enrollee: Enrollee): void {

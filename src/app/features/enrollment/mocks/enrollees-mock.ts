@@ -1,4 +1,4 @@
-import { Enrollee } from '../interfaces/enrollee.interface';
+import { Enrollee } from '../interfaces/enrollee';
 
 export const mockEnrollees: Enrollee[] = [
   {

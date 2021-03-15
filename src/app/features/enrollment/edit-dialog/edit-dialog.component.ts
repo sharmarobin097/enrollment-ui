@@ -1,8 +1,8 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { ActivationStatus } from '../interfaces/activation-status.interface';
-import { Enrollee } from '../interfaces/enrollee.interface';
+import { ActivationStatus } from '../interfaces/activation-status';
+import { Enrollee } from '../interfaces/enrollee';
 
 @Component({
   selector: 'app-edit-dialog',

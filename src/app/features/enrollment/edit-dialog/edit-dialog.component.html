@@ -20,7 +20,10 @@
         <mat-form-field>
           <mat-label>Activation Status</mat-label>
           <mat-select [(ngModel)]="enrollee.active" required name="activationStatus">
-          <mat-option [value]="activationStatus.value" *ngFor="let activationStatus of activationStatuses">
+          <mat-option
+            [value]="activationStatus.value"
+            *ngFor="let activationStatus of activationStatuses"
+          >
             {{ activationStatus.viewValue }}
           </mat-option>
           </mat-select>

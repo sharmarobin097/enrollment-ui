@@ -10,7 +10,7 @@ export enum ExcelFileNames {
 
 export const enrollmentListColWidths: XLSX.ColInfo[] = [
   { wch: 40 },
-  { wch: 40 },
-  { wch: 10 },
-  { wch: 10 },
+  { wch: 20 },
+  { wch: 20 },
+  { wch: 20 },
 ];

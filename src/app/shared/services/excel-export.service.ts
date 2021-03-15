@@ -4,14 +4,14 @@ import * as XLSX from 'xlsx';
 @Injectable({
   providedIn: 'root'
 })
-export class ExportExcelService {
+export class ExcelExportService {
 
   constructor() { }
 
-  exportToExcel<T>(data: T[][], fileName: string, excelColumnWidths: XLSX.ColInfo[]): void {
+  exportToExcel<T>(data: T[], fileName: string, excelColumnWidths: XLSX.ColInfo[]): void {
 
     // generate worksheet
-    const ws: XLSX.WorkSheet = XLSX.utils.aoa_to_sheet(data);
+    const ws: XLSX.WorkSheet = XLSX.utils.json_to_sheet(data);
     // column widths
     ws['!cols'] = excelColumnWidths;
 
